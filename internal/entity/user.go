@@ -9,12 +9,12 @@ type User struct {
 	Name     string `json:"name"`
 	LastName string `json:"last_name"`
 	Email    string `json:"email"`
-	UserDoc  int    `json:"user_doc"`
+	Nickname string `json:"nickname"`
 	Password string `json:"-"`
 	gorm.Model
 }
 
-func NewUser(name string, lastName string, email string, password string, userDoc int) (*User, error) {
+func NewUser(name string, lastName string, email string, password string, nickname string) (*User, error) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return nil, err
@@ -23,7 +23,7 @@ func NewUser(name string, lastName string, email string, password string, userDo
 		Name:     name,
 		LastName: lastName,
 		Email:    email,
-		UserDoc:  userDoc,
+		Nickname: nickname,
 		Password: string(hash),
 	}, nil
 }
