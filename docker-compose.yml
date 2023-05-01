@@ -1,12 +1,14 @@
 version: '3'
 
 services:
-  user_db:
-    image: postgres:alpine
-    environment: 
-      POSTGRES_USER: gorm
-      POSTGRES_PASSWORD: gorm
-      POSTGRES_DB: postgres
-      POSTGRES_HOST: localhost
+  mysql:
+    image: mysql:latest
+    container_name: backend
+    restart: always
+    platform: linux/amd64
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE:oddsdb
+      - MYSQL_PASSWORD:root
     ports:
-      - 3306:3306
+      - "3306:3306"

@@ -5,7 +5,7 @@ import (
 
 	"github.com/Scrowszinho/api-go-products/configs"
 	"github.com/Scrowszinho/api-go-products/internal/entity"
-	"gorm.io/driver/postgres"
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
@@ -14,8 +14,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	psqlInfo := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=disable", config.DBHost, config.DBUser, config.DBPassword, config.DBName, config.DBPort)
-	db, err := gorm.Open(postgres.Open(psqlInfo), &gorm.Config{})
+	dsn := fmt.Sprintf("%s:%s@tcp(127.0.0.1:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local", config.DBUser, config.DBPassword, config.DBPort, config.DBName)
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}

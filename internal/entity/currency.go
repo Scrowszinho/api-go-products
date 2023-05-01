@@ -9,16 +9,18 @@ import (
 type Currency struct {
 	Value       float64   `json:"value"`
 	Type        string    `json:"type"`
-	Status      string    `json:"status"`
+	GamblingID  int       `json:"gambling_id"`
 	DateCreated time.Time `json:"date_created"`
+	UserID      int       `json:"user_id"`
 	gorm.Model
 }
 
-func CreateCurrency(value float64, typee string, status string, dateCreated time.Time) *Currency {
+func CreateCurrency(value float64, typee string, user_id int, dateCreated time.Time, gambling_id int) *Currency {
 	return &Currency{
 		Value:       value,
 		Type:        typee,
-		Status:      status,
+		UserID:      user_id,
+		GamblingID:  gambling_id,
 		DateCreated: dateCreated,
 	}
 }
