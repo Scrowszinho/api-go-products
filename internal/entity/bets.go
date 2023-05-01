@@ -1,7 +1,7 @@
 package entity
 
 type Bets struct {
-	ID          int     `gorm:primaryKey`
+	ID          int     `gorm:"primaryKey"`
 	Name        string  `json:"name"`
 	Type        string  `json:"type"`
 	Description string  `json:"description"`
@@ -12,7 +12,7 @@ type Bets struct {
 }
 
 type Multiple struct {
-	ID       int `gorm:primaryKey`
+	ID       int `gorm:"primaryKey"`
 	Value    float64
 	Status   string `json:"status"`
 	Bets     []Bets
