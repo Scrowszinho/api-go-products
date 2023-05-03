@@ -7,7 +7,7 @@ import (
 )
 
 func TestNewBet(t *testing.T) {
-	bet, err := NewSimpleBet("Test", "Test", "Test", "SOLVED", 1.75, 1.75, 10)
+	bet, err := NewBet("Test", "Test", "Test", "SOLVED", 1.75, 1.75, 10)
 	assert.Nil(t, err)
 	assert.NotNil(t, bet)
 	assert.NotEmpty(t, bet.Odd)

@@ -11,7 +11,7 @@ type Bets struct {
 	FinalOdd    float64 `json:"final_odd"`
 }
 
-func NewSimpleBet(name string, typee string, description string, status Status, odd float64, finalOdd float64, val float64) (*Bets, error) {
+func NewBet(name string, typee string, description string, status Status, odd float64, finalOdd float64, val float64) (*Bets, error) {
 	bet := &Bets{
 		Name:        name,
 		Type:        typee,

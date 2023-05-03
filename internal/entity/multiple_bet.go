@@ -1,6 +1,7 @@
 package entity
 
-type betsMul struct {
+type BetsMult struct {
+	ID          int     `gorm:"primaryKey"`
 	Name        string  `json:"name"`
 	Type        string  `json:"type"`
 	Description string  `json:"description"`
@@ -16,13 +17,13 @@ type MultipleBet struct {
 	Description string `json:"description"`
 	Value       float64
 	Status      Status `json:"status"`
-	Bets        []betsMul
+	Bets        []BetsMult
 	Odd         float64 `json:"odds"`
 	FinalOdd    float64 `json:"final_odd"`
 	Bonus       float64 `json:"bonus"`
 }
 
-func CreateMultipleBet(name string, description string, value float64, status Status, bets []betsMul, odd float64, finalOdd float64, bonus float64) (*MultipleBet, error) {
+func CreateMultipleBet(name string, description string, value float64, status Status, bets []BetsMult, odd float64, finalOdd float64, bonus float64) (*MultipleBet, error) {
 	mulbet := &MultipleBet{
 		Name:        name,
 		Description: description,
