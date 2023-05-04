@@ -1,11 +1,18 @@
 package entity
 
-type Status string
+type BetStatus string
 
 const (
-	PENDING Status = "PENDING"
-	SOLVED         = "SOLVED"
-	LOST           = "LOST"
-	CASHOUT        = "CASHOUT"
-	AVOIDED        = "AVOIDED"
+	PENDING BetStatus = "PENDING"
+	SOLVED            = "SOLVED"
+	LOST              = "LOST"
+	CASHOUT           = "CASHOUT"
+	AVOIDED           = "AVOIDED"
+)
+
+type CurrencyStatus string
+
+const (
+	DEPOSIT  CurrencyStatus = "DEPOSIT"
+	WITHDRAW                = "WITHDRAW"
 )

@@ -1,6 +1,7 @@
 package entity
 
 import (
+	"errors"
 	"time"
 
 	"gorm.io/gorm"
@@ -9,18 +10,21 @@ import (
 type Currency struct {
 	ID          uint      `gorm:"primaryKey"`
 	Amount      float64   `json:"amount"`
-	Type        string    `gorm:"not null"`
 	DateCreated time.Time `json:"date_created"`
 	UserID      uint      `gorm:"not null"`
+	Status      CurrencyStatus
 	User        User
 	gorm.Model
 }
 
-func CreateCurrency(amount float64, typee string, dateCreated time.Time, user *User) *Currency {
+func CreateCurrency(amount float64, status CurrencyStatus, dateCreated time.Time, user *User) (*Currency, error) {
+	if amount <= 0 {
+		return nil, errors.New("amount must be positive")
+	}
 	return &Currency{
 		Amount:      amount,
-		Type:        typee,
-		UserID:      user.ID,
+		Status:      status,
 		DateCreated: dateCreated,
-	}
+		UserID:      user.ID,
+	}, nil
 }
