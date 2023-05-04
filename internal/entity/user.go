@@ -6,15 +6,16 @@ import (
 )
 
 type User struct {
-	Name     string `json:"name"`
-	LastName string `json:"last_name"`
-	Email    string `json:"email"`
-	Nickname string `json:"nickname"`
-	Password string `json:"-"`
+	Name     string `gorm:"not null"`
+	LastName string `gorm:"not null"`
+	Email    string `gorm:"unique;not null"`
+	Nickname string `gorm:"unique;not null"`
+	Password string `gorm:"not null"`
+	Balance  float64
 	gorm.Model
 }
 
-func NewUser(name string, lastName string, email string, password string, nickname string) (*User, error) {
+func NewUser(name string, lastName string, email string, password string, nickname string, balance float64) (*User, error) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return nil, err
@@ -25,6 +26,7 @@ func NewUser(name string, lastName string, email string, password string, nickna
 		Email:    email,
 		Nickname: nickname,
 		Password: string(hash),
+		Balance:  balance,
 	}, nil
 }
 

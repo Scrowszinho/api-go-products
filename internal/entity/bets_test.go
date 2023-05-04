@@ -2,17 +2,17 @@ package entity
 
 import (
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestNewBet(t *testing.T) {
-	bet, err := NewBet("Test", "Test", "Test", "SOLVED", 1.75, 1.75, 10)
+	user, err := NewUser("Test", "Test", "test@gmail", "123", "Test", 100)
+	event, err := NewEvent("Test", time.Now(), time.Now(), "Test")
+	outcomes, err := CreateOutcome(event, "Test", 2.75)
+	bet, err := NewBet(user, outcomes, 100.5, SOLVED, 0)
 	assert.Nil(t, err)
 	assert.NotNil(t, bet)
-	assert.NotEmpty(t, bet.Odd)
-	assert.NotEmpty(t, bet.Value)
-	assert.NotEmpty(t, bet.Name)
-	assert.NotEmpty(t, bet.Status)
-	assert.Equal(t, bet.Value*bet.Odd, 17.5)
+	assert.NotEmpty(t, bet.OutcomeID)
 }

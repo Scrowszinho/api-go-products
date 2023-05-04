@@ -1,25 +1,28 @@
 package entity
 
+import "errors"
+
 type Bets struct {
-	ID          int     `gorm:"primaryKey"`
-	Name        string  `json:"name"`
-	Type        string  `json:"type"`
-	Description string  `json:"description"`
-	Value       float64 `json:"value"`
-	Status      Status  `json:"status"`
-	Odd         float64 `json:"dds"`
-	FinalOdd    float64 `json:"final_odd"`
+	ID        uint    `gorm:"primaryKey"`
+	UserID    uint    `gorm:"not null"`
+	OutcomeID uint    `gorm:"not null"`
+	Amount    float64 `gorm:"not null"`
+	User      User    `gorm:"foreignKey:UserID"`
+	Status    string
+	Bonus     float64
+	Outcome   Outcome `gorm:"foreignKey:OutcomeID"`
 }
 
-func NewBet(name string, typee string, description string, status Status, odd float64, finalOdd float64, val float64) (*Bets, error) {
+func NewBet(user *User, outcome *Outcome, amount float64, status Status, bonus float64) (*Bets, error) {
+	if user.Balance < amount {
+		return nil, errors.New("Insufficient Balance")
+	}
 	bet := &Bets{
-		Name:        name,
-		Type:        typee,
-		Description: description,
-		Value:       val,
-		Status:      status,
-		Odd:         odd,
-		FinalOdd:    finalOdd,
+		UserID:    user.ID,
+		Status:    string(status),
+		OutcomeID: outcome.ID,
+		Amount:    amount,
+		Bonus:     bonus,
 	}
 	return bet, nil
 }
