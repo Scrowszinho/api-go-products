@@ -2,9 +2,9 @@ package database
 
 import "github.com/Scrowszinho/api-go-products/internal/entity"
 
-type User interface {
-	CreateUser(user *entity.User) error
-	FindByEmailOrUsername(name string) (*User, error)
+type UserInterface interface {
+	Create(user *entity.User) error
+	FindByEmail(email string) (*User, error)
 }
 
 type Bets interface {
