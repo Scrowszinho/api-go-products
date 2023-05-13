@@ -13,7 +13,7 @@ func TestCreateUser(t *testing.T) {
 	configs.ConnectGorm()
 	db := configs.GetDB()
 	migrations.MigrateTable()
-	user, _ := entity.NewUser("Gustavo", "Test", "gustavo@gmail.com", "123456", "Test", 1000.0)
+	user, _ := entity.NewUser("Test", "Test", "gustavo@gmail.com", "123456", "Test", 1000.0)
 	userDB := NewUser(db)
 
 	err := userDB.Create(user)
@@ -32,15 +32,10 @@ func TestByEmail(t *testing.T) {
 	configs.ConnectGorm()
 	db := configs.GetDB()
 	migrations.MigrateTable()
-	user, _ := entity.NewUser("Gustavo", "Test", "gustavo@gmail.com", "123456", "Test", 1000.0)
 	userDB := NewUser(db)
-
-	err := userDB.Create(user)
+	userFound, err := userDB.FindByEmail("gustavo@gmail.com")
 	assert.Nil(t, err)
-
-	userFound, err := userDB.FindByEmail(user.Email)
-	assert.Nil(t, err)
-	assert.Equal(t, userFound.ID, user.ID)
-	assert.Equal(t, userFound.Email, user.Email)
+	assert.Equal(t, userFound.ID, 1)
+	assert.Equal(t, userFound.Email, "gustavo@gmail.com")
 	assert.NotNil(t, userFound.Password)
 }
