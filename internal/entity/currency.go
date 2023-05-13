@@ -8,10 +8,10 @@ import (
 )
 
 type Currency struct {
-	ID          uint      `gorm:"primaryKey"`
+	ID          int       `gorm:"primaryKey"`
 	Amount      float64   `json:"amount"`
 	DateCreated time.Time `json:"date_created"`
-	UserID      uint      `gorm:"not null"`
+	UserID      int       `gorm:"not null"`
 	Status      CurrencyStatus
 	User        User
 	gorm.Model

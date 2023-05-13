@@ -1,17 +1,17 @@
 package entity
 
 type Outcome struct {
-	ID      uint    `gorm:"primaryKey"`
+	ID      int     `gorm:"primaryKey"`
 	Name    string  `gorm:"not null"`
 	Odds    float64 `gorm:"not null"`
-	EventID uint    `gorm:"not null"`
+	EventID int     `gorm:"not null"`
 	Event   Event   `gorm:"foreignKey:EventID"`
 }
 
 type MultiOutcome struct {
-	ID         uint     `gorm:"primaryKey"`
-	MultiBetID uint     `gorm:"not null"`
-	OutcomeID  uint     `gorm:"not null"`
+	ID         int      `gorm:"primaryKey"`
+	MultiBetID int      `gorm:"not null"`
+	OutcomeID  int      `gorm:"not null"`
 	Odds       float64  `gorm:"not null"`
 	MultiBet   MultiBet `gorm:"foreignKey:MultiBetID"`
 	Outcome    Outcome  `gorm:"foreignKey:OutcomeID"`

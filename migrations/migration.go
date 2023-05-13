@@ -6,7 +6,7 @@ import (
 )
 
 func getModels() []interface{} {
-	return []interface{}{&entity.User{}}
+	return []interface{}{&entity.User{}, &entity.Event{}}
 }
 
 func MigrateTable() {

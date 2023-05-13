@@ -4,15 +4,15 @@ type BetStatus string
 
 const (
 	PENDING BetStatus = "PENDING"
-	SOLVED            = "SOLVED"
-	LOST              = "LOST"
-	CASHOUT           = "CASHOUT"
-	AVOIDED           = "AVOIDED"
+	SOLVED  BetStatus = "SOLVED"
+	LOST    BetStatus = "LOST"
+	CASHOUT BetStatus = "CASHOUT"
+	AVOIDED BetStatus = "AVOIDED"
 )
 
 type CurrencyStatus string
 
 const (
 	DEPOSIT  CurrencyStatus = "DEPOSIT"
-	WITHDRAW                = "WITHDRAW"
+	WITHDRAW BetStatus      = "WITHDRAW"
 )

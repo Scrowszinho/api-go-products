@@ -8,5 +8,6 @@ import (
 func main() {
 	configs.ConnectGorm()
 	db := configs.GetDB()
+	db.AutoMigrate()
 	migrations.MigrateTable()
 }

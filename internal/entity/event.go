@@ -6,7 +6,7 @@ import (
 )
 
 type Event struct {
-	ID          uint      `gorm:"primaryKey"`
+	ID          int       `gorm:"primaryKey"`
 	Name        string    `gorm:"not null"`
 	StartTime   time.Time `gorm:"not null"`
 	EndTime     time.Time `gorm:"not null"`
@@ -15,10 +15,10 @@ type Event struct {
 
 func NewEvent(name string, startTime time.Time, endTime time.Time, description string) (*Event, error) {
 	if name == "" {
-		return nil, errors.New("Name is required")
+		return nil, errors.New("name is required")
 	}
 	if endTime.Before(startTime) {
-		return nil, errors.New("Final evente date muste be greater than or equal to the start date")
+		return nil, errors.New("final evente date muste be greater than or equal to the start date")
 	}
 	return &Event{
 		Name:        name,

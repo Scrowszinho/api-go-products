@@ -7,10 +7,10 @@ type UserInterface interface {
 	FindByEmail(email string) (*User, error)
 }
 
-type Bets interface {
-	Create(product *entity.Bets) error
-	FindAll(page, limit int, sort string) ([]entity.Bets, error)
-	FindById(id uint) (*entity.Bets, error)
-	Update(bet *entity.Bets) error
+type Events interface {
+	Create(product *entity.Event) error
+	FindAll(page, limit int, sort string) ([]entity.Event, error)
+	FindById(id int) (*entity.Event, error)
+	Update(event *entity.Event) error
 	Delete(id string) error
 }
