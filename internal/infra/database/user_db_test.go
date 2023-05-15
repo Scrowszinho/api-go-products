@@ -33,9 +33,12 @@ func TestByEmail(t *testing.T) {
 	db := configs.GetDB()
 	migrations.MigrateTable()
 	userDB := NewUser(db)
-	userFound, err := userDB.FindByEmail("gustavo@gmail.com")
+	userFound, err := userDB.FindByEmailOrNickname("gustavo@gmail.com")
+	assert.Nil(t, err)
+	userFound1, err := userDB.FindByEmailOrNickname("Test")
 	assert.Nil(t, err)
 	assert.Equal(t, userFound.ID, 1)
 	assert.Equal(t, userFound.Email, "gustavo@gmail.com")
+	assert.Equal(t, userFound.ID, userFound1.ID)
 	assert.NotNil(t, userFound.Password)
 }

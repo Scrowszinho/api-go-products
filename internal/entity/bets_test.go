@@ -20,7 +20,7 @@ func TestCreateBet(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	bet, err := NewBet(user, outcome, 100, CASHOUT, 10.00)
+	bet, err := NewBet(user, outcome, 100, CASHOUT, 10.00, true)
 	assert.Nil(t, err)
 	calc := bet.Amount * outcome.Odds
 	assert.Equal(t, calc+(calc*(bet.Bonus/100)), 192.5)

@@ -25,6 +25,12 @@ func (p *Event) FindById(id string) (*entity.Event, error) {
 	return &event, err
 }
 
+func (p *Event) FindByName(name string) (*entity.Event, error) {
+	var event entity.Event
+	err := p.DB.First(&event, "name = ?", name).Error
+	return &event, err
+}
+
 func (e *Event) Update(event *entity.Event) error {
 	id := strconv.Itoa(event.ID)
 	_, err := e.FindById(id)

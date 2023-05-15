@@ -8,12 +8,13 @@ type Bets struct {
 	OutcomeID int     `gorm:"not null"`
 	Amount    float64 `gorm:"not null"`
 	User      User    `gorm:"foreignKey:UserID"`
+	Active    bool    `json:"active"`
 	Status    string
 	Bonus     float64
 	Outcome   Outcome `gorm:"foreignKey:OutcomeID"`
 }
 
-func NewBet(user *User, outcome *Outcome, amount float64, status BetStatus, bonus float64) (*Bets, error) {
+func NewBet(user *User, outcome *Outcome, amount float64, status BetStatus, bonus float64, active bool) (*Bets, error) {
 	if user.Balance < amount {
 		return nil, errors.New("insufficient Balance")
 	}
@@ -22,6 +23,7 @@ func NewBet(user *User, outcome *Outcome, amount float64, status BetStatus, bonu
 		Status:    string(status),
 		OutcomeID: outcome.ID,
 		Amount:    amount,
+		Active:    active,
 		Bonus:     bonus,
 	}
 	return bet, nil

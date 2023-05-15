@@ -31,7 +31,7 @@ func TestCreateMultiOutcome(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	multBet, err := CreateMultipleBet(user, 100)
+	multBet, err := CreateMultipleBets(user, 100)
 	if err != nil {
 		panic(err)
 	}

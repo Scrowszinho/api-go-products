@@ -21,5 +21,49 @@ func TestCreateEvent(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotEmpty(t, event.ID)
 	assert.NotEqual(t, event.StartTime, event.EndTime)
+}
 
+func TestFidById(t *testing.T) {
+	configs.ConnectGorm()
+	db := configs.GetDB()
+	migrations.MigrateTable()
+	eventDB := NewEvent(db)
+
+	event, err := eventDB.FindById("4")
+	assert.Nil(t, err)
+	assert.Equal(t, event.Name, "Ufc")
+	assert.Equal(t, event.Description, "Test")
+}
+
+func TestFidByName(t *testing.T) {
+	configs.ConnectGorm()
+	db := configs.GetDB()
+	migrations.MigrateTable()
+	eventDB := NewEvent(db)
+
+	event, err := eventDB.FindByName("Ufc")
+	assert.Nil(t, err)
+	assert.Equal(t, event.Name, "Ufc")
+	assert.Equal(t, event.Description, "Test")
+}
+
+func TestDeleteById(t *testing.T) {
+	configs.ConnectGorm()
+	db := configs.GetDB()
+	migrations.MigrateTable()
+	eventDB := NewEvent(db)
+
+	err := eventDB.Delete("2")
+	assert.Nil(t, err)
+}
+
+func TestUpdate(t *testing.T) {
+	configs.ConnectGorm()
+	db := configs.GetDB()
+	migrations.MigrateTable()
+	eventDB := NewEvent(db)
+
+	event := entity.Event{ID: 4, Name: "Teste", StartTime: time.Now(), EndTime: time.Now().AddDate(0, 0, 1), Description: "Test"}
+	err := eventDB.Update(&event)
+	assert.Nil(t, err)
 }
