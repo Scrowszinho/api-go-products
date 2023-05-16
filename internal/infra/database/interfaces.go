@@ -7,7 +7,7 @@ type UserInterface interface {
 	FindByEmailOrNickname(email string) (*User, error)
 }
 
-type Events interface {
+type EventsInterface interface {
 	Create(product *entity.Event) error
 	FindAll(page, limit int, sort string) ([]entity.Event, error)
 	FindById(id int) (*entity.Event, error)
@@ -15,7 +15,7 @@ type Events interface {
 	Delete(id string) error
 }
 
-type Bets interface {
+type BetsInterface interface {
 	Create(bets *entity.Bets) error
 	FindAll(page, limit int, sort string) ([]entity.Bets, error)
 	FindById(id int) (*entity.Bets, error)
@@ -23,5 +23,13 @@ type Bets interface {
 	Delete(id string) error
 }
 
-type Outcome interface {
+type OutcomeInterface interface {
+	Create(outcome *entity.Outcome) error
+	FindById(id int) (*entity.Outcome, error)
+	FindOutcomesByEventID(page, limit int, sort string) ([]entity.Outcome, error)
+	Update(bets *entity.Outcome) error
+	Delete(id string) error
+}
+
+type MultipleOutcomesInterface interface {
 }
