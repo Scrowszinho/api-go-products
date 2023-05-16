@@ -17,7 +17,6 @@ type EventsInterface interface {
 
 type BetsInterface interface {
 	Create(bets *entity.Bets) error
-	FindAll(page, limit int, sort string) ([]entity.Bets, error)
 	FindById(id int) (*entity.Bets, error)
 	Update(bets *entity.Bets) error
 	Delete(id string) error

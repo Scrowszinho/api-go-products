@@ -14,5 +14,5 @@ type CurrencyStatus string
 
 const (
 	DEPOSIT  CurrencyStatus = "DEPOSIT"
-	WITHDRAW BetStatus      = "WITHDRAW"
+	WITHDRAW CurrencyStatus = "WITHDRAW"
 )
