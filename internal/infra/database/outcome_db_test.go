@@ -19,7 +19,7 @@ func TestCreateOutcome(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	outcome, err := entity.CreateOutcome(event, "Teste", 1.75)
+	outcome, err := entity.CreateOutcome(event, "Teste", 1.75, entity.AVOIDED)
 	err = outcomeDB.Create(outcome)
 	assert.Nil(t, err)
 	assert.Equal(t, outcome.EventID, event.ID)
@@ -63,14 +63,4 @@ func TestUpdateOutcome(t *testing.T) {
 	outcome := entity.Outcome{ID: 4, Name: "Milan vencer", Odds: 2, EventID: event.ID, Event: *event}
 	err = outcomeDB.Update(&outcome)
 	assert.Nil(t, err)
-}
-
-func TestFindOutcomesByEventID(t *testing.T) {
-	configs.ConnectGorm()
-	db := configs.GetDB()
-	migrations.MigrateTable()
-	outcomeDB := NewOutcome(db)
-	outcomes, err := outcomeDB.FindOutcomesByEventID(1, 10, "4")
-	assert.Nil(t, err)
-	assert.Equal(t, outcomes[0].Name, "Teste")
 }

@@ -32,7 +32,6 @@ type MultiBetsInterface interface {
 type OutcomeInterface interface {
 	Create(outcome *entity.Outcome) error
 	FindById(id int) (*entity.Outcome, error)
-	FindOutcomesByEventID(page, limit int, sort string) ([]entity.Outcome, error)
 	Update(bets *entity.Outcome) error
 	Delete(id string) error
 }

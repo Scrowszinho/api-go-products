@@ -43,17 +43,3 @@ func (o *Outcome) Delete(id string) error {
 	}
 	return o.DB.Delete(outcome).Error
 }
-
-func (o *Outcome) FindOutcomesByEventID(page, limit int, id string) ([]entity.Outcome, error) {
-	var (
-		outcomes []entity.Outcome
-		err      error
-	)
-
-	if page != 0 && limit != 0 {
-		err = o.DB.Limit(limit).Offset((page-1)*limit).Order("id "+"asc").Where("event_id = ?", id).Find(&outcomes).Error
-	} else {
-		err = o.DB.Order("id "+"asc").Where("event_id = ?", id).Error
-	}
-	return outcomes, err
-}

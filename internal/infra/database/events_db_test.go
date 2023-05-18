@@ -29,7 +29,7 @@ func TestFidById(t *testing.T) {
 	migrations.MigrateTable()
 	eventDB := NewEvent(db)
 
-	event, err := eventDB.FindById("4")
+	event, err := eventDB.FindById("1")
 	assert.Nil(t, err)
 	assert.Equal(t, event.Name, "Ufc")
 	assert.Equal(t, event.Description, "Test")
@@ -63,7 +63,7 @@ func TestUpdate(t *testing.T) {
 	migrations.MigrateTable()
 	eventDB := NewEvent(db)
 
-	event := entity.Event{ID: 4, Name: "Teste", StartTime: time.Now(), EndTime: time.Now().AddDate(0, 0, 1), Description: "Test"}
+	event := entity.Event{ID: 1, Name: "Teste", StartTime: time.Now(), EndTime: time.Now().AddDate(0, 0, 1), Description: "Test"}
 	err := eventDB.Update(&event)
 	assert.Nil(t, err)
 }

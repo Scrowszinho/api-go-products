@@ -12,7 +12,7 @@ func TestCreateOutcome(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	outcomes, err := CreateOutcome(event, "Test", 2.75)
+	outcomes, err := CreateOutcome(event, "Test", 2.75, AVOIDED)
 	assert.Nil(t, err)
 	assert.NotNil(t, outcomes)
 	assert.Equal(t, "Test", outcomes.Name)
@@ -23,7 +23,7 @@ func TestCreateMultiOutcome(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	outcome, err := CreateOutcome(event, "Test", 2.75)
+	outcome, err := CreateOutcome(event, "Test", 2.75, CASHOUT)
 	if err != nil {
 		panic(err)
 	}

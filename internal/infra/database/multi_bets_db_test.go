@@ -13,18 +13,16 @@ func TestCreateMultiBet(t *testing.T) {
 	configs.ConnectGorm()
 	db := configs.GetDB()
 	migrations.MigrateTable()
-	betsDB := NewBet(db)
+	betsDB := NewMultiBet(db)
 	userDB := NewUser(db)
-	outcomeDB := NewOutcome(db)
 	user, err := userDB.FindByEmailOrNickname("gustavo@gmail.com")
 	if err != nil {
 		panic(err)
 	}
-	outcome, err := outcomeDB.FindById("1")
+	bets, err := entity.CreateMultipleBets(user, 100.0)
 	if err != nil {
 		panic(err)
 	}
-	bets, err := entity.NewBet(user, outcome, 100, entity.AVOIDED, 0, true)
 	err = betsDB.Create(bets)
 	assert.Nil(t, err)
 }

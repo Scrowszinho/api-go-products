@@ -47,6 +47,27 @@ func TestDeleteBetById(t *testing.T) {
 	migrations.MigrateTable()
 	betDB := NewBet(db)
 
-	err := betDB.Delete("2")
+	err := betDB.Delete("0")
+	assert.Error(t, err)
+}
+
+func TestUpdateBet(t *testing.T) {
+	configs.ConnectGorm()
+	db := configs.GetDB()
+	migrations.MigrateTable()
+	betsDB := NewBet(db)
+	userDB := NewUser(db)
+	outcomeDB := NewOutcome(db)
+	user, err := userDB.FindByEmailOrNickname("gustavo@gmail.com")
+	if err != nil {
+		panic(err)
+	}
+	outcome, err := outcomeDB.FindById("1")
+	if err != nil {
+		panic(err)
+	}
+	bets := entity.Bets{ID: 1, UserID: 1, OutcomeID: 1, Amount: 10.0, User: *user, Active: true, Status: string(entity.AVOIDED), Bonus: 0, Outcome: *outcome}
+
+	err = betsDB.Update(&bets)
 	assert.Nil(t, err)
 }

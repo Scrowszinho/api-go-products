@@ -16,7 +16,7 @@ func TestCreateBet(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	outcome, err := CreateOutcome(event, "Test", 1.75)
+	outcome, err := CreateOutcome(event, "Test", 1.75, AVOIDED)
 	if err != nil {
 		panic(err)
 	}
