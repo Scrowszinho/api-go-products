@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCreateBet(t *testing.T) {
+func TestCreateMultiBet(t *testing.T) {
 	configs.ConnectGorm()
 	db := configs.GetDB()
 	migrations.MigrateTable()
@@ -29,7 +29,7 @@ func TestCreateBet(t *testing.T) {
 	assert.Nil(t, err)
 }
 
-func TestFindBetById(t *testing.T) {
+func TestFindBetMultiById(t *testing.T) {
 	configs.ConnectGorm()
 	db := configs.GetDB()
 	migrations.MigrateTable()
@@ -41,7 +41,7 @@ func TestFindBetById(t *testing.T) {
 	assert.Equal(t, bet.Status, "AVOIDED")
 }
 
-func TestDeleteBetById(t *testing.T) {
+func TestDeleteMultiBetById(t *testing.T) {
 	configs.ConnectGorm()
 	db := configs.GetDB()
 	migrations.MigrateTable()

@@ -22,6 +22,13 @@ type BetsInterface interface {
 	Delete(id string) error
 }
 
+type MultiBetsInterface interface {
+	Create(bets *entity.MultiBets) error
+	FindById(id int) (*entity.MultiBets, error)
+	Update(bets *entity.MultiBets) error
+	Delete(id string) error
+}
+
 type OutcomeInterface interface {
 	Create(outcome *entity.Outcome) error
 	FindById(id int) (*entity.Outcome, error)

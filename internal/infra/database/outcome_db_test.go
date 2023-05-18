@@ -15,7 +15,7 @@ func TestCreateOutcome(t *testing.T) {
 	migrations.MigrateTable()
 	eventDB := NewEvent(db)
 	outcomeDB := NewOutcome(db)
-	event, err := eventDB.FindById("4")
+	event, err := eventDB.FindById("1")
 	if err != nil {
 		panic(err)
 	}
