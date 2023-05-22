@@ -4,7 +4,7 @@ import "github.com/Scrowszinho/api-go-products/internal/entity"
 
 type UserInterface interface {
 	Create(user *entity.User) error
-	FindByEmailOrNickname(email string) (*User, error)
+	FindByEmailOrNickname(email string) (*entity.User, error)
 }
 
 type EventsInterface interface {

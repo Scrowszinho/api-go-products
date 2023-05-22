@@ -47,16 +47,6 @@ func TestFidByName(t *testing.T) {
 	assert.Equal(t, event.Description, "Test")
 }
 
-func TestDeleteById(t *testing.T) {
-	configs.ConnectGorm()
-	db := configs.GetDB()
-	migrations.MigrateTable()
-	eventDB := NewEvent(db)
-
-	err := eventDB.Delete("2")
-	assert.Nil(t, err)
-}
-
 func TestUpdate(t *testing.T) {
 	configs.ConnectGorm()
 	db := configs.GetDB()
@@ -66,4 +56,17 @@ func TestUpdate(t *testing.T) {
 	event := entity.Event{ID: 1, Name: "Teste", StartTime: time.Now(), EndTime: time.Now().AddDate(0, 0, 1), Description: "Test"}
 	err := eventDB.Update(&event)
 	assert.Nil(t, err)
+}
+
+func TestDeleteById(t *testing.T) {
+	configs.ConnectGorm()
+	db := configs.GetDB()
+	migrations.MigrateTable()
+	eventDB := NewEvent(db)
+
+	err := eventDB.Delete("1")
+	assert.Nil(t, err)
+	err = eventDB.Delete("0")
+	assert.Error(t, err)
+
 }

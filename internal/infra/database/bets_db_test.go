@@ -41,16 +41,6 @@ func TestFindBetById(t *testing.T) {
 	assert.Equal(t, bet.Status, "AVOIDED")
 }
 
-func TestDeleteBetById(t *testing.T) {
-	configs.ConnectGorm()
-	db := configs.GetDB()
-	migrations.MigrateTable()
-	betDB := NewBet(db)
-
-	err := betDB.Delete("0")
-	assert.Error(t, err)
-}
-
 func TestUpdateBet(t *testing.T) {
 	configs.ConnectGorm()
 	db := configs.GetDB()
@@ -70,4 +60,14 @@ func TestUpdateBet(t *testing.T) {
 
 	err = betsDB.Update(&bets)
 	assert.Nil(t, err)
+}
+
+func TestDeleteBetById(t *testing.T) {
+	configs.ConnectGorm()
+	db := configs.GetDB()
+	migrations.MigrateTable()
+	betDB := NewBet(db)
+
+	err := betDB.Delete("0")
+	assert.Error(t, err)
 }
