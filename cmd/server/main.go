@@ -27,8 +27,15 @@ func main() {
 	r.Use(middleware.Recoverer)
 	userDB := database.NewUser(db)
 	userHandler := handlers.NewUserHandler(userDB, config.TokenAuth, config.JWTExpiresIn)
-	r.Post("/users", userHandler.CreateUser)
-	r.Post("/users/login", userHandler.GetJWT)
+	userRoutes(r, *userHandler)
 	http.ListenAndServe(":8000", r)
+
+}
+
+func userRoutes(r *chi.Mux, userHandler handlers.UserHandler) {
+	r.Route("/users", func(r chi.Router) {
+		r.Post("/", userHandler.CreateUser)
+		r.Post("/login", userHandler.GetJWT)
+	})
 
 }

@@ -1,7 +1,6 @@
 package dto
 
 type CreateUserInput struct {
-	ID       int     `json:"id"`
 	Name     string  `json:"name"`
 	LastName string  `json:"last_name"`
 	Email    string  `json:"email"`
@@ -11,7 +10,7 @@ type CreateUserInput struct {
 }
 
 type GetJWTInput struct {
-	EmailOrNickname string `json:"email"`
+	EmailOrNickname string `json:"user"`
 	Password        string `json:"password"`
 }
 
