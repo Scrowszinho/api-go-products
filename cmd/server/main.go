@@ -47,11 +47,12 @@ func eventsRoutes(r *chi.Mux, eventsHandler handlers.EventHandler, config *confi
 	r.Route("/events", func(r chi.Router) {
 		r.Use(jwtauth.Verifier(config.TokenAuth))
 		r.Use(jwtauth.Authenticator)
+
 		r.Post("/", eventsHandler.CreateEvent)
 		r.Get("/{id}", eventsHandler.GetEvent)
 		r.Get("/", eventsHandler.GetEvents)
 		r.Put("/{id}", eventsHandler.UpdateEvent)
-		r.Post("/{id}", eventsHandler.DeleteEvent)
+		r.Delete("/{id}", eventsHandler.DeleteEvent)
 
 	})
 }
