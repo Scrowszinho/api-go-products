@@ -6,11 +6,11 @@ import (
 )
 
 type Event struct {
-	ID          int       `gorm:"primaryKey"`
-	Name        string    `gorm:"not null"`
-	StartTime   time.Time `gorm:"not null"`
-	EndTime     time.Time `gorm:"not null"`
-	Description string
+	ID          int       `gorm:"primaryKey" json:"id"`
+	Name        string    `gorm:"not null" json:"name"`
+	StartTime   time.Time `gorm:"not null" json:"start_time"`
+	EndTime     time.Time `gorm:"not null" json:"end_time"`
+	Description string    `json:"description"`
 }
 
 func NewEvent(name string, startTime time.Time, endTime time.Time, description string) (*Event, error) {
