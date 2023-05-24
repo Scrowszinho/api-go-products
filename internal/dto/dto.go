@@ -1,5 +1,7 @@
 package dto
 
+import "time"
+
 type CreateUserInput struct {
 	Name     string  `json:"name"`
 	LastName string  `json:"last_name"`
@@ -16,4 +18,11 @@ type GetJWTInput struct {
 
 type GetJWTOutput struct {
 	AccessToken string `json:"access_token"`
+}
+
+type CreateEventInput struct {
+	Name        string    `json:"name"`
+	StartTime   time.Time `json:"start_time"`
+	EndTime     time.Time `json:"end_time"`
+	Description string    `json:"description"`
 }
