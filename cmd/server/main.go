@@ -28,10 +28,13 @@ func main() {
 	r.Use(middleware.Recoverer)
 	userDB := database.NewUser(db)
 	eventDB := database.NewEvent(db)
+	outcomeDB := database.NewOutcome(db)
 	userHandler := handlers.NewUserHandler(userDB, config.TokenAuth, config.JWTExpiresIn)
 	eventHanler := handlers.NewEventHandler(eventDB)
+	outcomeHandler := handlers.NewOutcomeHandler(outcomeDB)
 	userRoutes(r, *userHandler)
 	eventsRoutes(r, *eventHanler, config)
+	outcomeRoutes(r, *outcomeHandler, config)
 	http.ListenAndServe(":8000", r)
 
 }
@@ -54,5 +57,18 @@ func eventsRoutes(r *chi.Mux, eventsHandler handlers.EventHandler, config *confi
 		r.Put("/{id}", eventsHandler.UpdateEvent)
 		r.Delete("/{id}", eventsHandler.DeleteEvent)
 
+	})
+}
+
+func outcomeRoutes(r *chi.Mux, eventsHandler handlers.OutcomeHandler, config *configs.Configs) {
+	r.Route("/outcome", func(r chi.Router) {
+		r.Use(jwtauth.Verifier(config.TokenAuth))
+		r.Use(jwtauth.Authenticator)
+
+		r.Post("/", eventsHandler.CreateOutcome)
+		r.Get("/{id}", eventsHandler.GetOutcome)
+		r.Get("/", eventsHandler.GetOutcomesByEventId)
+		r.Put("/{id}", eventsHandler.UpdateOutcome)
+		r.Delete("/{id}", eventsHandler.DeleteOutcome)
 	})
 }

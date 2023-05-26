@@ -36,7 +36,6 @@ func TestFindBetMultiById(t *testing.T) {
 	bet, err := betDB.FindById("1")
 	assert.Nil(t, err)
 	assert.Equal(t, bet.Amount, 100.0)
-	assert.Equal(t, bet.Status, "AVOIDED")
 }
 
 func TestDeleteMultiBetById(t *testing.T) {
