@@ -45,6 +45,6 @@ func TestDeleteMultiBetById(t *testing.T) {
 	migrations.MigrateTable()
 	betDB := NewBet(db)
 
-	err := betDB.Delete("2")
+	err := betDB.Delete("1")
 	assert.Nil(t, err)
 }

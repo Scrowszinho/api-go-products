@@ -58,9 +58,9 @@ func (p *Event) FindAll(page, limit int, sort string) ([]entity.Event, error) {
 		sort = "asc"
 	}
 	if page != 0 && limit != 0 {
-		err = p.DB.Limit(limit).Offset((page - 1) * limit).Order("created_at " + sort).Find(&events).Error
+		err = p.DB.Limit(limit).Offset((page - 1) * limit).Order("start_time " + sort).Find(&events).Error
 	} else {
-		err = p.DB.Order("created_at" + sort).Find(&events).Error
+		err = p.DB.Order("start_time" + sort).Find(&events).Error
 	}
 	return events, err
 }

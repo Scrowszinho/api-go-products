@@ -5,7 +5,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-type configs struct {
+type Configs struct {
 	DBDriver      string `mapstructure:"DB_DRIVER"`
 	DBHost        string `mapstructure:"DB_HOST"`
 	DBPort        int    `mapstructure:"DB_PORT"`
@@ -18,9 +18,9 @@ type configs struct {
 	TokenAuth     *jwtauth.JWTAuth
 }
 
-var cfg *configs
+var cfg *Configs
 
-func GetConfigs(path string) (*configs, error) {
+func GetConfigs(path string) (*Configs, error) {
 	viper.SetConfigName("app_config")
 	viper.SetConfigFile("env")
 	viper.AddConfigPath(path)
