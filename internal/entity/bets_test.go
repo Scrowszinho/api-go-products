@@ -11,12 +11,8 @@ func TestCreateBet(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	outcome, err := CreateOutcome(1, "Test", 1.75, AVOIDED)
-	if err != nil {
-		panic(err)
-	}
-	bet, err := NewBet(user, outcome, 100, 10.00, true)
+	bet, err := NewBet(user, 1, 100, 10.00, true)
 	assert.Nil(t, err)
-	calc := bet.Amount * outcome.Odds
+	calc := bet.Amount * 1.75
 	assert.Equal(t, calc+(calc*(bet.Bonus/100)), 192.5)
 }

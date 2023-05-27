@@ -1,8 +1,6 @@
 package database
 
 import (
-	"strconv"
-
 	"github.com/Scrowszinho/api-go-products/internal/entity"
 	"gorm.io/gorm"
 )
@@ -19,22 +17,21 @@ func (b *Bet) Create(bets *entity.Bets) error {
 	return b.DB.Create(bets).Error
 }
 
-func (b *Bet) FindById(id string) (*entity.Bets, error) {
+func (b *Bet) FindById(id int) (*entity.Bets, error) {
 	var bets entity.Bets
 	err := b.DB.First(&bets, "id = ?", id).Error
 	return &bets, err
 }
 
 func (b *Bet) Update(bets *entity.Bets) error {
-	id := strconv.Itoa(bets.ID)
-	_, err := b.FindById(id)
+	_, err := b.FindById(bets.ID)
 	if err != nil {
 		return err
 	}
 	return b.DB.Save(bets).Error
 }
 
-func (b *Bet) Delete(id string) error {
+func (b *Bet) Delete(id int) error {
 	bets, err := b.FindById(id)
 	if err != nil {
 		return err

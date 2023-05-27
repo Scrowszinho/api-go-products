@@ -29,18 +29,21 @@ func main() {
 	userDB := database.NewUser(db)
 	eventDB := database.NewEvent(db)
 	outcomeDB := database.NewOutcome(db)
+	betsDB := database.NewBet(db)
 	userHandler := handlers.NewUserHandler(userDB, config.TokenAuth, config.JWTExpiresIn)
 	eventHanler := handlers.NewEventHandler(eventDB)
 	outcomeHandler := handlers.NewOutcomeHandler(outcomeDB)
+	betsHandler := handlers.NewBetsHandler(betsDB)
 	userRoutes(r, *userHandler)
 	eventsRoutes(r, *eventHanler, config)
 	outcomeRoutes(r, *outcomeHandler, config)
+	betsRoutes(r, *betsHandler, config)
 	http.ListenAndServe(":8000", r)
 
 }
 
 func userRoutes(r *chi.Mux, userHandler handlers.UserHandler) {
-	r.Route("/users", func(r chi.Router) {
+	r.Route("/user", func(r chi.Router) {
 		r.Post("/", userHandler.CreateUser)
 		r.Post("/login", userHandler.GetJWT)
 	})
@@ -70,5 +73,14 @@ func outcomeRoutes(r *chi.Mux, eventsHandler handlers.OutcomeHandler, config *co
 		r.Get("/", eventsHandler.GetOutcomesByEventId)
 		r.Put("/{id}", eventsHandler.UpdateOutcome)
 		r.Delete("/{id}", eventsHandler.DeleteOutcome)
+	})
+}
+
+func betsRoutes(r *chi.Mux, betsHandler handlers.BetsHandler, config *configs.Configs) {
+	r.Route("/bet", func(r chi.Router) {
+		r.Use(jwtauth.Verifier(config.TokenAuth))
+		r.Use(jwtauth.Authenticator)
+
+		r.Post("/", betsHandler.CreateBets)
 	})
 }
