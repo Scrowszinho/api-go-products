@@ -32,6 +32,13 @@ func (e *BetsHandler) CreateBets(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(msg)
 		return
 	}
+	ctx := r.Context()
+	userClaims, ok := ctx.Value("user").(*entity.User)
+	if !ok {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+	bets.User = *userClaims
 	b, err := entity.NewBet(&bets.User, bets.OutcomeID, bets.Amount, bets.Bonus, bets.Active)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
