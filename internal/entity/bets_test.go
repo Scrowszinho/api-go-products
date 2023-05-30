@@ -2,7 +2,6 @@ package entity
 
 import (
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -12,16 +11,8 @@ func TestCreateBet(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	event, err := NewEvent("Test", time.Now(), time.Now().AddDate(0, 0, 2), "Test")
-	if err != nil {
-		panic(err)
-	}
-	outcome, err := CreateOutcome(event, "Test", 1.75, AVOIDED)
-	if err != nil {
-		panic(err)
-	}
-	bet, err := NewBet(user, outcome, 100, CASHOUT, 10.00, true)
+	bet, err := NewBet(user, 1, 100, 10.00, true)
 	assert.Nil(t, err)
-	calc := bet.Amount * outcome.Odds
+	calc := bet.Amount * 1.75
 	assert.Equal(t, calc+(calc*(bet.Bonus/100)), 192.5)
 }

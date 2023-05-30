@@ -33,10 +33,9 @@ func TestFindBetMultiById(t *testing.T) {
 	migrations.MigrateTable()
 	betDB := NewBet(db)
 
-	bet, err := betDB.FindById("1")
+	bet, err := betDB.FindById(1)
 	assert.Nil(t, err)
 	assert.Equal(t, bet.Amount, 100.0)
-	assert.Equal(t, bet.Status, "AVOIDED")
 }
 
 func TestDeleteMultiBetById(t *testing.T) {
@@ -45,6 +44,6 @@ func TestDeleteMultiBetById(t *testing.T) {
 	migrations.MigrateTable()
 	betDB := NewBet(db)
 
-	err := betDB.Delete("1")
+	err := betDB.Delete(1)
 	assert.Nil(t, err)
 }
