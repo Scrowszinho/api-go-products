@@ -5,6 +5,7 @@ import (
 
 	"github.com/Scrowszinho/api-go-products/configs"
 	"github.com/Scrowszinho/api-go-products/internal/infra/database"
+	"github.com/Scrowszinho/api-go-products/internal/middlewares"
 	"github.com/Scrowszinho/api-go-products/internal/webserver/handlers"
 	"github.com/Scrowszinho/api-go-products/migrations"
 	"github.com/go-chi/chi"
@@ -30,10 +31,12 @@ func main() {
 	eventDB := database.NewEvent(db)
 	outcomeDB := database.NewOutcome(db)
 	betsDB := database.NewBet(db)
+
 	userHandler := handlers.NewUserHandler(userDB, config.TokenAuth, config.JWTExpiresIn)
 	eventHanler := handlers.NewEventHandler(eventDB)
 	outcomeHandler := handlers.NewOutcomeHandler(outcomeDB)
 	betsHandler := handlers.NewBetsHandler(betsDB)
+
 	userRoutes(r, *userHandler)
 	eventsRoutes(r, *eventHanler, config)
 	outcomeRoutes(r, *outcomeHandler, config)
@@ -53,6 +56,7 @@ func eventsRoutes(r *chi.Mux, eventsHandler handlers.EventHandler, config *confi
 	r.Route("/events", func(r chi.Router) {
 		r.Use(jwtauth.Verifier(config.TokenAuth))
 		r.Use(jwtauth.Authenticator)
+		r.Use(middlewares.AuthMiddleware)
 
 		r.Post("/", eventsHandler.CreateEvent)
 		r.Get("/{id}", eventsHandler.GetEvent)
@@ -80,6 +84,7 @@ func betsRoutes(r *chi.Mux, betsHandler handlers.BetsHandler, config *configs.Co
 	r.Route("/bet", func(r chi.Router) {
 		r.Use(jwtauth.Verifier(config.TokenAuth))
 		r.Use(jwtauth.Authenticator)
+		r.Use(middlewares.AuthMiddleware)
 
 		r.Post("/", betsHandler.CreateBets)
 	})

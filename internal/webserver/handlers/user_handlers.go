@@ -3,7 +3,6 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
-	"strconv"
 	"time"
 
 	"github.com/Scrowszinho/api-go-products/internal/dto"
@@ -47,11 +46,12 @@ func (h *UserHandler) GetJWT(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	_, tokenString, _ := h.Jwt.Encode(map[string]interface{}{
-		"sub": strconv.Itoa(u.ID),
-		"exp": time.Now().Add(time.Hour * time.Duration(h.JwtExpiresIn)).Unix(),
+		"user": u.ID,
+		"exp":  time.Now().Add(time.Hour * time.Duration(h.JwtExpiresIn)).Unix(),
 	})
 
-	accessToken := dto.GetJWTOutput{AccessToken: tokenString, User: u, CreationDate: time.Now(), ExpirationDate: time.Now().Add(time.Hour * time.Duration(h.JwtExpiresIn))}
+	expires := time.Now().Add(time.Hour * time.Duration(h.JwtExpiresIn))
+	accessToken := dto.GetJWTOutput{AccessToken: tokenString, User: u, CreationDate: time.Now(), ExpirationDate: expires}
 	w.Header().Set("content-type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(accessToken)
