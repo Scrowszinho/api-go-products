@@ -46,7 +46,7 @@ func (h *UserHandler) GetJWT(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	_, tokenString, _ := h.Jwt.Encode(map[string]interface{}{
-		"user": u,
+		"user": u.ID,
 		"exp":  time.Now().Add(time.Hour * time.Duration(h.JwtExpiresIn)).Unix(),
 	})
 

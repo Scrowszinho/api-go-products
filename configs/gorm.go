@@ -16,7 +16,7 @@ func GetDB() *gorm.DB {
 }
 
 func ConnectGorm() {
-	config, err := GetConfigs(".")
+	config, err := GetConfigs("..")
 	if err != nil {
 		panic(err)
 	}

@@ -2,11 +2,9 @@ package middlewares
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 	"strings"
 
-	"github.com/Scrowszinho/api-go-products/internal/entity"
 	"github.com/go-chi/jwtauth"
 )
 
@@ -27,14 +25,9 @@ func AuthMiddleware(next http.Handler) http.Handler {
 			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
-		decodedClaims, ok := claims.(*entity.User)
-		if !ok {
-			w.WriteHeader(http.StatusUnauthorized)
-			return
-		}
-		fmt.Println(decodedClaims)
-
-		ctx := context.WithValue(r.Context(), "user", decodedClaims)
+		decodedClaims := claims["user"].(float64)
+		id := int(decodedClaims)
+		ctx := context.WithValue(r.Context(), "user", id)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	}
 

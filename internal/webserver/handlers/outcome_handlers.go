@@ -41,6 +41,7 @@ func (o *OutcomeHandler) CreateOutcome(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(error)
 		return
 	}
+	json.NewEncoder(w).Encode(outcome)
 	w.WriteHeader(http.StatusCreated)
 
 }

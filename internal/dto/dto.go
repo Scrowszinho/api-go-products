@@ -42,9 +42,8 @@ type CreateOutcomesInput struct {
 }
 
 type CreateBetsInput struct {
-	User      entity.User `json:"user"`
-	OutcomeID int         `json:"outcome_id"`
-	Amount    float64     `json:"amount"`
-	Active    bool        `json:"active"`
-	Bonus     float64     `json:"bonus"`
+	OutcomeID int     `json:"outcome_id"`
+	Amount    float64 `json:"amount"`
+	Active    bool    `json:"active"`
+	Bonus     float64 `json:"bonus"`
 }

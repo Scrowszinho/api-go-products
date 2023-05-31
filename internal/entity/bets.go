@@ -1,7 +1,5 @@
 package entity
 
-import "errors"
-
 type Bets struct {
 	ID        int     `gorm:"primaryKey" json:"id"`
 	UserID    int     `gorm:"not null" json:"user_id"`
@@ -13,12 +11,9 @@ type Bets struct {
 	Outcome   Outcome `gorm:"foreignKey:OutcomeID"`
 }
 
-func NewBet(user *User, outcome_id int, amount float64, bonus float64, active bool) (*Bets, error) {
-	if user.Balance < amount {
-		return nil, errors.New("insufficient Balance")
-	}
+func NewBet(userID int, outcome_id int, amount float64, bonus float64, active bool) (*Bets, error) {
 	bet := &Bets{
-		UserID:    user.ID,
+		UserID:    userID,
 		OutcomeID: outcome_id,
 		Amount:    amount,
 		Active:    active,
