@@ -11,7 +11,7 @@ type Outcome struct {
 	Event   Event     `gorm:"foreignKey:EventID"`
 }
 
-type MultiOutcome struct {
+type MultiBetsOutcome struct {
 	ID          int       `gorm:"primaryKey"`
 	MultiBetsID int       `gorm:"not null"`
 	OutcomeID   int       `gorm:"not null"`
@@ -33,8 +33,8 @@ func CreateOutcome(event int, name string, odds float64, status BetStatus) (*Out
 	}, nil
 }
 
-func CreateMultiOutcome(multiBet *MultiBets, outcome *Outcome) (*MultiOutcome, error) {
-	return &MultiOutcome{
+func CreateMultiBetsOutcome(multiBet *MultiBets, outcome *Outcome) (*MultiBetsOutcome, error) {
+	return &MultiBetsOutcome{
 		MultiBetsID: multiBet.ID,
 		OutcomeID:   outcome.ID,
 		Odds:        outcome.Odds,
