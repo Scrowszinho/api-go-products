@@ -125,3 +125,31 @@ func (e *BetsHandler) UpdateBets(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(http.StatusOK)
 }
+
+func (e *BetsHandler) GetBetsByUser(w http.ResponseWriter, r *http.Request) {
+	page, err := strconv.Atoi(r.URL.Query().Get("page"))
+	if err != nil {
+		page = 0
+	}
+	limit, err := strconv.Atoi(r.URL.Query().Get("limit"))
+	if err != nil {
+		limit = 0
+	}
+	id, ok := r.Context().Value("user").(int)
+	if !ok {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	bets, err := e.BetsDB.FindBetsByUser(page, limit, id)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(bets)
+}

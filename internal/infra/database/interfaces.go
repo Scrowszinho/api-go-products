@@ -1,6 +1,9 @@
 package database
 
-import "github.com/Scrowszinho/api-go-products/internal/entity"
+import (
+	"github.com/Scrowszinho/api-go-products/internal/dto"
+	"github.com/Scrowszinho/api-go-products/internal/entity"
+)
 
 type UserInterface interface {
 	Create(user *entity.User) error
@@ -18,6 +21,7 @@ type EventsInterface interface {
 type BetsInterface interface {
 	Create(bets *entity.Bets) error
 	FindById(id int) (*entity.Bets, error)
+	FindBetsByUser(page, limit int, user_id int) ([]dto.GetSingleBetsByUser, error)
 	Update(bets *entity.Bets) error
 	Delete(id int) error
 }

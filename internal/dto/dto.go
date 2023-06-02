@@ -47,3 +47,16 @@ type CreateBetsInput struct {
 	Active    bool    `json:"active"`
 	Bonus     float64 `json:"bonus"`
 }
+
+type GetSingleBetsByUser struct {
+	ID               uint      `json:"id"`
+	Amount           float64   `json:"amount"`
+	Odds             float64   `json:"odds"`
+	Status           string    `json:"status"`
+	OutcomeName      string    `json:"name"`
+	EventID          uint      `json:"event_id"`
+	EventName        string    `json:"event_name"`
+	EventStartTime   time.Time `json:"start_time"`
+	EventEndTime     time.Time `json:"end_time"`
+	EventDescription string    `json:"event_description"`
+}

@@ -87,5 +87,6 @@ func betsRoutes(r *chi.Mux, betsHandler handlers.BetsHandler, config *configs.Co
 		r.Use(middlewares.AuthMiddleware)
 
 		r.Post("/", betsHandler.CreateBets)
+		r.Get("/", betsHandler.GetBetsByUser)
 	})
 }
