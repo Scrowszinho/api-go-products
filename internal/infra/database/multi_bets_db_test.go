@@ -14,12 +14,7 @@ func TestCreateMultiBet(t *testing.T) {
 	db := configs.GetDB()
 	migrations.MigrateTable()
 	betsDB := NewMultiBet(db)
-	userDB := NewUser(db)
-	user, err := userDB.FindByEmailOrNickname("gustavo@gmail.com")
-	if err != nil {
-		panic(err)
-	}
-	bets, err := entity.CreateMultipleBets(user, 100.0)
+	bets, err := entity.CreateMultipleBets(1, 100.0)
 	if err != nil {
 		panic(err)
 	}
