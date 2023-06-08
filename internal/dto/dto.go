@@ -16,7 +16,7 @@ type CreateUserInput struct {
 }
 
 type GetJWTInput struct {
-	Email    string `json:"Email"`
+	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 

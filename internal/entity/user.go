@@ -2,18 +2,16 @@ package entity
 
 import (
 	"golang.org/x/crypto/bcrypt"
-	"gorm.io/gorm"
 )
 
 type User struct {
-	ID       int    `gorm:"primaryKey"`
-	Name     string `gorm:"not null"`
-	LastName string `gorm:"not null"`
-	Email    string `gorm:"unique;not null"`
-	Nickname string `gorm:"unique;not null"`
-	Password string `gorm:"not null"`
-	Balance  float64
-	gorm.Model
+	ID       int     `gorm:"primaryKey"  json:"id"`
+	Name     string  `gorm:"not null"  json:"name"`
+	LastName string  `gorm:"not null"  json:"last_name"`
+	Email    string  `gorm:"unique;not null"  json:"email"`
+	Nickname string  `gorm:"unique;not null"  json:"nickname"`
+	Password string  `gorm:"not null"  json:"password"`
+	Balance  float64 ` json:"balance"`
 }
 
 func NewUser(name string, lastName string, email string, password string, nickname string, balance float64) (*User, error) {

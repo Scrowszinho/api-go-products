@@ -10,6 +10,7 @@ import (
 	"github.com/Scrowszinho/api-go-products/migrations"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/cors"
 	"github.com/go-chi/jwtauth"
 )
 
@@ -46,6 +47,14 @@ func main() {
 }
 
 func userRoutes(r *chi.Mux, userHandler handlers.UserHandler) {
+	r.Use(cors.Handler(cors.Options{
+		AllowedOrigins:   []string{"https://*", "http://*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: false,
+		MaxAge:           300,
+	}))
 	r.Route("/user", func(r chi.Router) {
 		r.Post("/", userHandler.CreateUser)
 		r.Post("/login", userHandler.GetJWT)
