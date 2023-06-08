@@ -13,7 +13,3 @@ services:
       - MYSQL_TCP_PORT:3306
     ports:
       - "3306:3306"
-  
-  frontend: 
-    container_name: frontend
-    restart: unless-stoped
