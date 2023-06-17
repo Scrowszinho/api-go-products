@@ -13,7 +13,7 @@ func TestCreateUser(t *testing.T) {
 	configs.ConnectGorm()
 	db := configs.GetDB()
 	migrations.MigrateTable()
-	user, _ := entity.NewUser("Test", "Test", "gustavo@gmail.com", "123456", "Test", 1000.0)
+	user, _ := entity.NewUser("Test", "gustavo@gmail.com", "123456", "Test", 1000.0)
 	userDB := NewUser(db)
 
 	err := userDB.Create(user)

@@ -64,7 +64,7 @@ func (h *UserHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	u, err := entity.NewUser(user.Name, user.LastName, user.Email, user.Password, user.Nickname, 0)
+	u, err := entity.NewUser(user.Name, user.Email, user.Password, user.Nickname, 0)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		error := Error{Message: err.Error()}
