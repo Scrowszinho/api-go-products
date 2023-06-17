@@ -37,7 +37,7 @@ func TestUpdateBet(t *testing.T) {
 	betsDB := NewBet(db)
 	userDB := NewUser(db)
 	outcomeDB := NewOutcome(db)
-	user, err := userDB.FindByEmailOrNickname("gustavo@gmail.com")
+	user, err := userDB.FindByEmail("gustavo@gmail.com")
 	if err != nil {
 		panic(err)
 	}

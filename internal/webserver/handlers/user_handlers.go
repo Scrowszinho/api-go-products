@@ -36,7 +36,7 @@ func (h *UserHandler) GetJWT(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	u, err := h.UserDB.FindByEmailOrNickname(user.Email)
+	u, err := h.UserDB.FindByEmail(user.Email)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		return

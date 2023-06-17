@@ -7,7 +7,7 @@ import (
 
 type UserInterface interface {
 	Create(user *entity.User) error
-	FindByEmailOrNickname(email string) (*entity.User, error)
+	FindByEmail(email string) (*entity.User, error)
 }
 
 type EventsInterface interface {
