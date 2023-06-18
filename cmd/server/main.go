@@ -56,7 +56,7 @@ func userRoutes(r *chi.Mux, userHandler handlers.UserHandler) {
 		MaxAge:           300,
 	}))
 	r.Route("/user", func(r chi.Router) {
-		r.Post("/", userHandler.CreateUser)
+		r.Post("/signup", userHandler.CreateUser)
 		r.Post("/login", userHandler.GetJWT)
 	})
 }
