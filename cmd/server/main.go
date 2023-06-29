@@ -90,7 +90,7 @@ func outcomeRoutes(r *chi.Mux, eventsHandler handlers.OutcomeHandler, config *co
 }
 
 func betsRoutes(r *chi.Mux, betsHandler handlers.BetsHandler, config *configs.Configs) {
-	r.Route("/bet", func(r chi.Router) {
+	r.Route("/bets", func(r chi.Router) {
 		r.Use(jwtauth.Verifier(config.TokenAuth))
 		r.Use(jwtauth.Authenticator)
 		r.Use(middlewares.AuthMiddleware)
