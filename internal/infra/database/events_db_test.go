@@ -53,7 +53,7 @@ func TestUpdate(t *testing.T) {
 	migrations.MigrateTable()
 	eventDB := NewEvent(db)
 
-	event := entity.Event{ID: 1, Name: "Teste", StartTime: time.Now(), EndTime: time.Now().AddDate(0, 0, 1), Description: "Test"}
+	event := entity.Events{ID: 1, Name: "Teste", StartTime: time.Now(), EndTime: time.Now().AddDate(0, 0, 1), Description: "Test"}
 	err := eventDB.Update(&event)
 	assert.Nil(t, err)
 }

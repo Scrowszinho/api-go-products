@@ -39,7 +39,7 @@ func (e *BetsHandler) CreateBets(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
-	b, err := entity.NewBet(id, bets.OutcomeID, bets.Amount, bets.Bonus, bets.Active, bets.Odds)
+	b, err := entity.NewBet(id, bets.EventID, bets.Amount, bets.Bonus, bets.Active)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		return

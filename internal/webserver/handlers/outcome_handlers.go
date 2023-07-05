@@ -28,7 +28,7 @@ func (o *OutcomeHandler) CreateOutcome(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	u, err := entity.CreateOutcome(outcome.Name, outcome.Odds, outcome.Status, outcome.MarketID)
+	u, err := entity.CreateOutcome(outcome.Name, outcome.Odds, outcome.Status, outcome.MarketID, outcome.BetID)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(err)

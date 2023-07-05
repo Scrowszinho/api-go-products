@@ -11,10 +11,10 @@ type UserInterface interface {
 }
 
 type EventsInterface interface {
-	Create(product *entity.Event) error
-	FindAll(page, limit int, sort string) ([]entity.Event, error)
-	FindById(id string) (*entity.Event, error)
-	Update(event *entity.Event) error
+	Create(product *entity.Events) error
+	FindAll(page, limit int, sort string) ([]entity.Events, error)
+	FindById(id string) (*entity.Events, error)
+	Update(event *entity.Events) error
 	Delete(id string) error
 }
 

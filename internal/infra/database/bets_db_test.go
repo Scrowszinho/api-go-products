@@ -14,7 +14,7 @@ func TestCreateBet(t *testing.T) {
 	db := configs.GetDB()
 	migrations.MigrateTable()
 	betsDB := NewBet(db)
-	bets, err := entity.NewBet(1, 1, 100, 0, true, 1.75)
+	bets, err := entity.NewBet(1, 1, 100, 0, true)
 	err = betsDB.Create(bets)
 	assert.Nil(t, err)
 }
@@ -36,16 +36,11 @@ func TestUpdateBet(t *testing.T) {
 	migrations.MigrateTable()
 	betsDB := NewBet(db)
 	userDB := NewUser(db)
-	outcomeDB := NewOutcome(db)
 	user, err := userDB.FindByEmail("gustavo@gmail.com")
 	if err != nil {
 		panic(err)
 	}
-	outcome, err := outcomeDB.FindById(1)
-	if err != nil {
-		panic(err)
-	}
-	bets := entity.Bets{ID: 1, UserID: 1, OutcomeID: 1, Amount: 10.0, User: *user, Active: true, Bonus: 0, Outcome: *outcome}
+	bets := entity.Bets{ID: 1, UserID: 1, Amount: 10.0, User: *user, Active: true, Bonus: 0}
 
 	err = betsDB.Update(&bets)
 	assert.Nil(t, err)

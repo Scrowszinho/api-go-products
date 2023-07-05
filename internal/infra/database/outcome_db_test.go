@@ -14,7 +14,7 @@ func TestCreateOutcome(t *testing.T) {
 	db := configs.GetDB()
 	migrations.MigrateTable()
 	outcomeDB := NewOutcome(db)
-	outcome, err := entity.CreateOutcome("Lutado A vencera", 1.75, entity.AVOIDED, 1)
+	outcome, err := entity.CreateOutcome("Lutado A vencera", 1.75, entity.AVOIDED, 1, 1)
 	err = outcomeDB.Create(outcome)
 	assert.Nil(t, err)
 	assert.Equal(t, outcome.Name, "Lutado A vencera")
