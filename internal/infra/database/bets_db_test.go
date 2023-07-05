@@ -14,7 +14,7 @@ func TestCreateBet(t *testing.T) {
 	db := configs.GetDB()
 	migrations.MigrateTable()
 	betsDB := NewBet(db)
-	bets, err := entity.NewBet(1, 1, 100, 0, true)
+	bets, err := entity.NewBet(1, 1, 100, 0, true, 1.75)
 	err = betsDB.Create(bets)
 	assert.Nil(t, err)
 }

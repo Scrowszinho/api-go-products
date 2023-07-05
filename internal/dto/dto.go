@@ -46,6 +46,7 @@ type CreateBetsInput struct {
 	Amount    float64 `json:"amount"`
 	Active    bool    `json:"active"`
 	Bonus     float64 `json:"bonus"`
+	Odds      float64 `json:"odds"`
 }
 
 type GetSingleBetsByUser struct {
