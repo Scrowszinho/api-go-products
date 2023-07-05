@@ -7,31 +7,31 @@ import (
 	"gorm.io/gorm"
 )
 
-type Event struct {
+type Events struct {
 	DB *gorm.DB
 }
 
-func NewEvent(db *gorm.DB) *Event {
-	return &Event{DB: db}
+func NewEvent(db *gorm.DB) *Events {
+	return &Events{DB: db}
 }
 
-func (p *Event) Create(event *entity.Event) error {
+func (p *Events) Create(event *entity.Events) error {
 	return p.DB.Create(event).Error
 }
 
-func (p *Event) FindById(id string) (*entity.Event, error) {
-	var event entity.Event
+func (p *Events) FindById(id string) (*entity.Events, error) {
+	var event entity.Events
 	err := p.DB.First(&event, "id = ?", id).Error
 	return &event, err
 }
 
-func (p *Event) FindByName(name string) (*entity.Event, error) {
-	var event entity.Event
+func (p *Events) FindByName(name string) (*entity.Events, error) {
+	var event entity.Events
 	err := p.DB.First(&event, "name = ?", name).Error
 	return &event, err
 }
 
-func (e *Event) Update(event *entity.Event) error {
+func (e *Events) Update(event *entity.Events) error {
 	id := strconv.Itoa(event.ID)
 	_, err := e.FindById(id)
 	if err != nil {
@@ -40,7 +40,7 @@ func (e *Event) Update(event *entity.Event) error {
 	return e.DB.Save(event).Error
 }
 
-func (p *Event) Delete(id string) error {
+func (p *Events) Delete(id string) error {
 	product, err := p.FindById(id)
 	if err != nil {
 		return err
@@ -48,9 +48,9 @@ func (p *Event) Delete(id string) error {
 	return p.DB.Delete(product).Error
 }
 
-func (p *Event) FindAll(page, limit int, sort string) ([]entity.Event, error) {
+func (p *Events) FindAll(page, limit int, sort string) ([]entity.Events, error) {
 	var (
-		events []entity.Event
+		events []entity.Events
 		err    error
 	)
 

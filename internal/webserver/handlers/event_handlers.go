@@ -53,7 +53,7 @@ func (h *EventHandler) UpdateEvent(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	var event entity.Event
+	var event entity.Events
 	err := json.NewDecoder(r.Body).Decode(&event)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
