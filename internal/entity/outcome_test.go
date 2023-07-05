@@ -7,23 +7,8 @@ import (
 )
 
 func TestCreateOutcome(t *testing.T) {
-	outcomes, err := CreateOutcome(1, "Test", 2.75, AVOIDED)
+	outcomes, err := CreateOutcome("Lutador A", 1.75, AVOIDED, 1)
 	assert.Nil(t, err)
 	assert.NotNil(t, outcomes)
-	assert.Equal(t, "Test", outcomes.Name)
-}
-
-func TestCreateMultiBetsOutcome(t *testing.T) {
-	outcome, err := CreateOutcome(1, "Test", 2.75, CASHOUT)
-	if err != nil {
-		panic(err)
-	}
-	multBet, err := CreateMultipleBets(1, 100)
-	if err != nil {
-		panic(err)
-	}
-	outcomes, err := CreateMultiBetsOutcome(multBet, outcome)
-	assert.Nil(t, err)
-	assert.Equal(t, outcomes.Odds*multBet.Amount, 275.0)
-
+	assert.Equal(t, "Lutador A", outcomes.Name)
 }

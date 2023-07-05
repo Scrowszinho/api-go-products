@@ -35,10 +35,11 @@ type CreateEventInput struct {
 }
 
 type CreateOutcomesInput struct {
-	Name    string           `json:"name"`
-	Odds    float64          `json:"odds"`
-	EventID int              `json:"event_id"`
-	Status  entity.BetStatus `json:"status"`
+	Name     string           `json:"name"`
+	Odds     float64          `json:"odds"`
+	EventID  int              `json:"event_id"`
+	Status   entity.BetStatus `json:"status"`
+	MarketID int              `json:"market_id"`
 }
 
 type CreateBetsInput struct {

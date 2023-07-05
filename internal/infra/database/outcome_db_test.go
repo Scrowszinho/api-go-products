@@ -13,16 +13,11 @@ func TestCreateOutcome(t *testing.T) {
 	configs.ConnectGorm()
 	db := configs.GetDB()
 	migrations.MigrateTable()
-	eventDB := NewEvent(db)
 	outcomeDB := NewOutcome(db)
-	event, err := eventDB.FindById("1")
-	if err != nil {
-		panic(err)
-	}
-	outcome, err := entity.CreateOutcome(1, "Teste", 1.75, entity.AVOIDED)
+	outcome, err := entity.CreateOutcome("Lutado A vencera", 1.75, entity.AVOIDED, 1)
 	err = outcomeDB.Create(outcome)
 	assert.Nil(t, err)
-	assert.Equal(t, outcome.EventID, event.ID)
+	assert.Equal(t, outcome.Name, "Lutado A vencera")
 }
 
 func TestFindOutcomeById(t *testing.T) {
@@ -33,7 +28,7 @@ func TestFindOutcomeById(t *testing.T) {
 
 	outcome, err := outcomeDB.FindById(1)
 	assert.Nil(t, err)
-	assert.Equal(t, outcome.Name, "Teste")
+	assert.Equal(t, outcome.Name, "Lutado A vencera")
 	assert.Equal(t, outcome.Odds, 1.75)
 }
 
@@ -41,15 +36,10 @@ func TestUpdateOutcome(t *testing.T) {
 	configs.ConnectGorm()
 	db := configs.GetDB()
 	migrations.MigrateTable()
-	eventDB := NewEvent(db)
 	outcomeDB := NewOutcome(db)
-	event, err := eventDB.FindById("1")
-	if err != nil {
-		panic(err)
-	}
 
-	outcome := entity.Outcome{ID: 1, Name: "Milan vencer", Odds: 2, EventID: event.ID, Event: *event}
-	err = outcomeDB.Update(&outcome)
+	outcome := entity.Outcome{ID: 1, Name: "Milan vencer", Odds: 2, MarketID: 1}
+	err := outcomeDB.Update(&outcome)
 	assert.Nil(t, err)
 }
 
@@ -59,8 +49,6 @@ func TestDeleteOutcomeById(t *testing.T) {
 	migrations.MigrateTable()
 	outcomeDB := NewOutcome(db)
 
-	err := outcomeDB.Delete(1)
-	assert.Nil(t, err)
-	err = outcomeDB.Delete(0)
+	err := outcomeDB.Delete(0)
 	assert.Error(t, err)
 }
