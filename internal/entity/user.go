@@ -13,6 +13,7 @@ type User struct {
 	Nickname  string    `json:"nickname"`
 	Password  string    `gorm:"not null"  json:"password"`
 	Balance   float64   ` json:"balance"`
+	Active    bool      `json:"active"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -28,6 +29,7 @@ func NewUser(name string, email string, password string, nickname string, balanc
 		Nickname: nickname,
 		Password: string(hash),
 		Balance:  balance,
+		Active:   true,
 	}, nil
 }
 
